@@ -2,43 +2,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const Book = ({ book }) => {
+  const fullStars = Math.floor(book.rating);
+  const hasHalfStar = !Number.isInteger(book.rating);
+
   return (
-  <div className="book">
-    <a href="#">
-      <figure className="book_img--wrapper">
-        <img src={book.url} alt={book.title} className="book_img" />
-      </figure>
-    </a>
-
-    <div className="book_title">
-      <a href="#" className="book_title--link">
-        {book.title}
+    <div className="book">
+      <a href="#">
+        <figure className="book__img--wrapper">
+          <img src={book.url} alt={book.title} className="book__img" />
+        </figure>
       </a>
-    </div>
 
-    <div className="book_ratings">
-      {new Array(Math.floor(book.rating))
-        .fill(0)
-        .map((_, index) => (
+      <div className="book__title">
+        <a href="#" className="book_title--link">
+          {book.title}
+        </a>
+      </div>
+
+      <div className="book__ratings">
+        {new Array(fullStars).fill(0).map((_, index) => (
           <FontAwesomeIcon icon="star" key={index} />
         ))}
-    </div>
 
-    <div className="book_price">
-      {book.salePrice ? (
-        <>
-          <span className="book_price--normal">
-            ${book.originalPrice.toFixed(2)}
-          </span>
-          ${book.salePrice.toFixed(2)}
-        </>
-      ) : (
-        <>${book.originalPrice.toFixed(2)}</>
-      )}
+        {hasHalfStar && (
+          <FontAwesomeIcon icon="star-half-stroke" />
+        )}
+      </div>
+
+      <div className="book_price">
+        {book.salePrice ? (
+          <>
+            <span className="book__price--normal">
+              ${book.originalPrice.toFixed(2)}
+            </span>
+            ${book.salePrice.toFixed(2)}
+          </>
+        ) : (
+          <>${book.originalPrice.toFixed(2)}</>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
-export default Book;    
+export default Book;
+
 
