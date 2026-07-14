@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Rating from "./Rating";
 
 const Book = ({ book }) => {
   const fullStars = Math.floor(book.rating);
@@ -7,44 +8,27 @@ const Book = ({ book }) => {
 
   return (
     <div className="book">
-      <a href="#">
-        <figure className="book__img--wrapper">
-          <img src={book.url} alt={book.title} className="book__img" />
-        </figure>
-      </a>
+      <Link to="/books/1">
+        <button className="book__img--wrapper" onClick={() => {}}>
+          <figure>
+            <img src={book.url} alt={book.title} className="book__img" />
+          </figure>
+        </button>
+      </Link>
+
 
       <div className="book__title">
-        <a href="#" className="book_title--link">
+      
+        <button className="book_title--link" onClick={() => {}}>
           {book.title}
-        </a>
+        </button>
       </div>
+<Price salePrice={book.salePrice} originalPrice={book.originalPrice} />
+     <Rating rating={book.rating} />
 
-      <div className="book__ratings">
-        {new Array(fullStars).fill(0).map((_, index) => (
-          <FontAwesomeIcon icon="star" key={index} />
-        ))}
-
-        {hasHalfStar && (
-          <FontAwesomeIcon icon="star-half-stroke" />
-        )}
-      </div>
-
-      <div className="book_price">
-        {book.salePrice ? (
-          <>
-            <span className="book__price--normal">
-              ${book.originalPrice.toFixed(2)}
-            </span>
-            ${book.salePrice.toFixed(2)}
-          </>
-        ) : (
-          <>${book.originalPrice.toFixed(2)}</>
-        )}
-      </div>
+     
     </div>
   );
 };
 
 export default Book;
-
-

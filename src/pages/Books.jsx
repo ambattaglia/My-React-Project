@@ -6,35 +6,29 @@ const Books = () => {
   const [filteredBooks, setFilteredBooks] = useState(books);
 
   function filterBooks(filter) {
-    console.log(filter);
-
     if (filter === 'LOW_TO_HIGH') {
       setFilteredBooks(
-        books
-          .slice()
-          .sort(
-            (a, b) =>
-              (a.salePrice || a.originalPrice) -
-              (b.salePrice || b.originalPrice)
-          )
+        [...filteredBooks].sort(
+          (a, b) =>
+            (a.salePrice || a.originalPrice) -
+            (b.salePrice || b.originalPrice)
+        )
       );
     }
 
     if (filter === 'HIGH_TO_LOW') {
       setFilteredBooks(
-        books
-          .slice()
-          .sort(
-            (a, b) =>
-              (b.salePrice || b.originalPrice) -
-              (a.salePrice || a.originalPrice)
-          )
+        [...filteredBooks].sort(
+          (a, b) =>
+            (b.salePrice || b.originalPrice) -
+            (a.salePrice || a.originalPrice)
+        )
       );
     }
 
     if (filter === 'RATING') {
       setFilteredBooks(
-        books.slice().sort((a, b) => b.rating - a.rating)
+        [...filteredBooks].sort((a, b) => b.rating - a.rating)
       );
     }
   }
@@ -46,7 +40,9 @@ const Books = () => {
           <div className="books__container">
             <div className="row">
               <div className="books__header">
-                <h2 className="section__title books__header--title">All Books</h2>
+                <h2 className="section__title books__header--title">
+                  All Books
+                </h2>
 
                 <select
                   id="filter"
