@@ -8,7 +8,7 @@ const Books = () => {
   function filterBooks(filter) {
     if (filter === 'LOW_TO_HIGH') {
       setFilteredBooks(
-        [...filteredBooks].sort(
+        [...books].sort(
           (a, b) =>
             (a.salePrice || a.originalPrice) -
             (b.salePrice || b.originalPrice)
@@ -18,7 +18,7 @@ const Books = () => {
 
     if (filter === 'HIGH_TO_LOW') {
       setFilteredBooks(
-        [...filteredBooks].sort(
+        [...books].sort(
           (a, b) =>
             (b.salePrice || b.originalPrice) -
             (a.salePrice || a.originalPrice)
@@ -28,7 +28,7 @@ const Books = () => {
 
     if (filter === 'RATING') {
       setFilteredBooks(
-        [...filteredBooks].sort((a, b) => b.rating - a.rating)
+        [...books].sort((a, b) => b.rating - a.rating)
       );
     }
   }

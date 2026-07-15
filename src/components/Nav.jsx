@@ -25,9 +25,10 @@ const Nav = ({ numberOfItems }) => {
             </Link>
           </li>
           <li className="nav__list">
-            <Link to="/books" className="nav__link nav__link--primary">
-              Books
-            </Link>
+            <Link to="/books" className="nav__link nav__link--primary" replace>
+  Books
+</Link>
+
           </li>
           <button className="btn__menu" onClick={openMenu}>
             <FontAwesomeIcon icon="bars" />
