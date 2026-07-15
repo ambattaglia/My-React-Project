@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -11,7 +11,6 @@ import Cart from "./pages/Cart";
 function App() {
   const [cart, setCart] = useState([]);
 
-  // Add item to cart
   function addToCart(book) {
     const dupeItem = cart.find(item => +item.id === +book.id);
 
@@ -28,7 +27,6 @@ function App() {
     }
   }
 
-  // Update quantity
   function updateCart(item, quantity) {
     setCart(
       cart.map(cartItem =>
@@ -39,12 +37,10 @@ function App() {
     );
   }
 
-  // Remove item
   function removeItem(item) {
     setCart(cart.filter(cartItem => cartItem.id !== item.id));
   }
 
-  // Totals
   const totals = {
     subtotal: cart.reduce(
       (sum, item) =>
@@ -63,20 +59,17 @@ function App() {
     ),
   };
 
-  useEffect(() => {
-    console.log("Cart updated:", cart);
-  }, [cart]);
-
   return (
-    <div className="App">
+    <Router>
       <Nav numberOfItems={cart.reduce((sum, item) => sum + item.quantity, 0)} />
-
-
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/books/:id" element={<BookInfo addToCart={addToCart} />} />
+        <Route
+          path="/books/:id"
+          element={<BookInfo addToCart={addToCart} />}
+        />
         <Route
           path="/cart"
           element={
@@ -91,7 +84,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </div>
+    </Router>
   );
 }
 

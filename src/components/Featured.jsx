@@ -1,26 +1,29 @@
-import React from 'react';
-import Book from './Book';
-import { books } from '../data';
+import React from "react";
+import { Link } from "react-router-dom";
+import Book from "./Book";
+import { books } from "../data";
 
 const Featured = () => {
-  // Safe default fallback
-  const booksList = books || [];
-
   return (
-    <section id="features">
+    <section id="featured">
       <div className="container">
         <div className="row">
           <h2 className="section__title">
             Featured <span className="purple">Books</span>
           </h2>
+
           <div className="books">
-            {booksList
-              .filter((book) => book.rating === 5)
+            {books
+              .filter(book => book.rating === 5)
               .slice(0, 4)
-              .map((book) => (
-                <Book book={book} key={book.id} />
+              .map(book => (
+                <Book key={book.id} book={book} />
               ))}
           </div>
+
+          <Link to="/books" className="btn">
+            Explore More Books
+          </Link>
         </div>
       </div>
     </section>
